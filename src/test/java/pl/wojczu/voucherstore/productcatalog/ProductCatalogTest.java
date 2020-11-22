@@ -6,6 +6,8 @@ import org.junit.Test;
 import java.math.BigDecimal;
 import java.util.List;
 
+import static org.assertj.core.api.Assertions.*;
+
 public class ProductCatalogTest {
 
     public static final String MY_DESCRIPTION = "My product description";
@@ -64,10 +66,26 @@ public class ProductCatalogTest {
 
         List<Product> products = api.allPublishedProducts();
 
-        Assert.assertEquals(1, products.size());
+        assertThat(products)
+                .hasSize(1)
+                .extracting(Product::getId)
+                .contains(productId)
+                .doesNotContain(draftProductId);
+    }
+
+    @Test
+    public void itDenyActionOnNotExistedProduct(){
+        ProductCatalogFacade api = thereIsProductCatalog();
+
+        assertThatThrownBy(() -> api.getById("notExists"))
+                .hasMessage("There is no product with id: notExists");
+        assertThatThrownBy(() -> api.updateProductDetails("notExists", "desc", "img"))
+                .hasMessage("There is no product with id: notExists");
+        assertThatThrownBy(() -> api.applyPrice("notExists", BigDecimal.TEN))
+                .hasMessage("There is no product with id: notExists");
     }
 
     private static ProductCatalogFacade thereIsProductCatalog() {
-        return new ProductCatalogFacade();
+        return new ProductCatalogConfiguration().productCatalogFacade();
     }
 }
