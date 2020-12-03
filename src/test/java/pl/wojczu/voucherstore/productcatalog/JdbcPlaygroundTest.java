@@ -81,7 +81,7 @@ public class JdbcPlaygroundTest {
                 ";";
 
         jdbcTemplate.execute(query);
-        var selectQuery = "Select * from `products_catalog__products` WHERE id = ?";
+        var selectQuery = "SELECT * FROM `products_catalog__products` WHERE id = ?";
         Product product = jdbcTemplate.queryForObject(selectQuery, new Object[] {PRODUCT_ID}, new ProductRowMapper());
 
         assertThat(product.getId()).isEqualTo(PRODUCT_ID);
