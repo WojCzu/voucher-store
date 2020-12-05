@@ -27,13 +27,21 @@ public class ProductCatalogFacade {
 
     public void updateProductDetails(String productId, String description, String image) {
         Product product = getProductOrException(productId);
+
         product.setDescription(description);
         product.setImage(image);
+
+        productStorage.save(product);
+
     }
 
     public void applyPrice(String productId, BigDecimal price) {
+
         Product product = getProductOrException(productId);
         product.setPrice(price);
+
+        productStorage.save(product);
+
     }
 
     public List<Product> allPublishedProducts() {
