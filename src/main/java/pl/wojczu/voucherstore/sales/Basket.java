@@ -1,6 +1,7 @@
 package pl.wojczu.voucherstore.sales;
 
 import pl.wojczu.voucherstore.productcatalog.Product;
+import pl.wojczu.voucherstore.sales.exceptions.NotEnoughProductsException;
 
 import java.util.HashMap;
 import java.util.List;
@@ -24,7 +25,10 @@ public class Basket {
         return products.isEmpty();
     }
 
-    public void add(Product product) {
+    public void add(Product product, Inventory inventory) {
+        if (!inventory.isAvailable(product.getId())){
+            throw new NotEnoughProductsException();
+        }
         if(!isContains(product)){
             putIntoBasket(product);
         }else {
