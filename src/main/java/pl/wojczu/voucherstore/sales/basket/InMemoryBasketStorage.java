@@ -1,4 +1,4 @@
-package pl.wojczu.voucherstore.sales;
+package pl.wojczu.voucherstore.sales.basket;
 
 import java.util.Map;
 import java.util.Optional;

@@ -1,6 +1,7 @@
-package pl.wojczu.voucherstore.sales;
+package pl.wojczu.voucherstore.sales.basket;
 
 import pl.wojczu.voucherstore.productcatalog.Product;
+import pl.wojczu.voucherstore.sales.Inventory;
 import pl.wojczu.voucherstore.sales.exceptions.NotEnoughProductsException;
 
 import java.util.HashMap;
