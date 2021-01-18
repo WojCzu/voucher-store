@@ -17,7 +17,7 @@ public class CollectionProductsTest extends SalesTestCase {
         basketStorage = thereIsBasketStorage();
         inventory = thereIsInventory();
         currentConsumerContext = thereIsCurrentCustomerContext();
-        offerMaker = thereIsOfferMaker();
+        offerMaker = thereIsOfferMaker(productCatalog);
     }
 
     @Test

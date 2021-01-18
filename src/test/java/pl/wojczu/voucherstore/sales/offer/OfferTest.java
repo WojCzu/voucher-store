@@ -18,12 +18,14 @@ public class OfferTest {
                 new BasketLine("product2", 1)
         );
 
-
         OfferMaker offerMaker = thereIsOfferMaker();
         Offer offer = offerMaker.calculateOffer(basketItems);
 
         assertThat(offer.getTotal())
                 .isEqualTo(BigDecimal.valueOf(30));
+
+        assertThat(offer.getOfferLines())
+                .hasSize(2);
     }
 
     @Test
@@ -31,7 +33,6 @@ public class OfferTest {
         List<BasketLine> basketItems = Collections.singletonList(
                 new BasketLine("product1", 1)
         );
-
 
         OfferMaker offerMaker = thereIsOfferMaker();
         Offer offer = offerMaker.calculateOffer(basketItems);
@@ -41,6 +42,10 @@ public class OfferTest {
     }
 
     private OfferMaker thereIsOfferMaker() {
-        return new OfferMaker();
+        return new OfferMaker(productId -> new ProductDetails(
+                productId,
+                String.format("%s-desc", productId),
+                BigDecimal.valueOf(10)
+        ));
     }
 }

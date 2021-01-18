@@ -14,7 +14,7 @@ public class OrderingTest extends SalesTestCase {
         basketStorage = thereIsBasketStorage();
         inventory = thereIsInventory();
         currentConsumerContext = thereIsCurrentCustomerContext();
-        offerMaker = thereIsOfferMaker();
+        offerMaker = thereIsOfferMaker(productCatalog);
     }
 
     @Test
@@ -34,6 +34,7 @@ public class OrderingTest extends SalesTestCase {
     }
 
     private void thereIsPendingReservationWithId(String reservationId) {
+
         assertThat(true).isFalse();
     }
 }

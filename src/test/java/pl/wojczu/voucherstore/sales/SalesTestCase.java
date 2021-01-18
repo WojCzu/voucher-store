@@ -1,9 +1,11 @@
 package pl.wojczu.voucherstore.sales;
 
+import pl.wojczu.voucherstore.productcatalog.Product;
 import pl.wojczu.voucherstore.productcatalog.ProductCatalogConfiguration;
 import pl.wojczu.voucherstore.productcatalog.ProductCatalogFacade;
 import pl.wojczu.voucherstore.sales.basket.InMemoryBasketStorage;
 import pl.wojczu.voucherstore.sales.offer.OfferMaker;
+import pl.wojczu.voucherstore.sales.offer.ProductDetails;
 
 import java.math.BigDecimal;
 import java.util.UUID;
@@ -17,7 +19,15 @@ public class SalesTestCase {
     String customerId;
     OfferMaker offerMaker;
 
-    protected OfferMaker thereIsOfferMaker() {return new OfferMaker();}
+    protected OfferMaker thereIsOfferMaker(ProductCatalogFacade productCatalogFacade) {
+        return new OfferMaker(productId -> {
+            Product product = productCatalogFacade.getById(productId);
+            return new ProductDetails(
+                    productId,
+                    product.getDescription(),
+                    product.getPrice());
+        });
+    }
 
     protected CurrentCustomerContext thereIsCurrentCustomerContext() {
         return () -> customerId;
