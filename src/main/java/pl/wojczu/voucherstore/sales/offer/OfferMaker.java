@@ -1,6 +1,8 @@
 package pl.wojczu.voucherstore.sales.offer;
 
 import pl.wojczu.voucherstore.sales.basket.BasketLine;
+import pl.wojczu.voucherstore.sales.product.ProductDetails;
+import pl.wojczu.voucherstore.sales.product.ProductDetailsProvider;
 
 import java.math.BigDecimal;
 import java.util.List;
