@@ -17,6 +17,7 @@ const createProductComponent = (product) => {
     </div>
     <span className="products__item-price">${product.price}</span>
     `;
+
 	const button = document.createElement('button');
 	button.className = 'products__button';
 	button.textContent = 'Add to basket';
@@ -25,15 +26,15 @@ const createProductComponent = (product) => {
 		const productId = e.target.getAttribute('data-product-id');
 		handleAddToBasket(productId)
 			.then(() => refreshCurrentOfer())
-			.catch((error) => console.log(error));
+			.catch((error) => alert(error));
 	});
+
 	item.appendChild(button);
 	return item;
 };
 
-const handleAddToBasket = (productId) => {
+const handleAddToBasket = (productId) =>
 	fetch(`/api/basket/add/${productId}`, { method: 'POST' });
-};
 
 const refreshCurrentOfer = async () => {
 	try {

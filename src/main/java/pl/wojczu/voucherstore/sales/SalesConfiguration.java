@@ -15,10 +15,12 @@ public class SalesConfiguration {
 
     @Bean
     SalesFacade salesFacade(ProductCatalogFacade productCatalogFacade, OfferMaker offerMaker, Inventory inventory){
+        var alwaysSameCustomer= UUID.randomUUID().toString();
+
         return new SalesFacade(
                 productCatalogFacade,
                 new InMemoryBasketStorage(),
-                () -> UUID.randomUUID().toString(),
+                () -> alwaysSameCustomer,
                 inventory,
                 offerMaker
 
