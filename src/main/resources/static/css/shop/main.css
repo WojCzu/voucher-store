@@ -1,0 +1,18 @@
+body {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+*,
+*::after,
+*::before {
+	box-sizing: inherit;
+}
+.header__headline {
+	text-align: center;
+}
+.products {
+	display: flex;
+	justify-content: space-evenly;
+	list-style: none;
+}
