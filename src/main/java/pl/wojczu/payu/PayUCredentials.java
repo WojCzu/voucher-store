@@ -1,5 +1,8 @@
 package pl.wojczu.payu;
 
+import lombok.Getter;
+
+@Getter
 public class PayUCredentials {
 
     private final String posId;
