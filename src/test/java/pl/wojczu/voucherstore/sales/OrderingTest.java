@@ -15,6 +15,7 @@ public class OrderingTest extends SalesTestCase {
         inventory = thereIsInventory();
         currentConsumerContext = thereIsCurrentCustomerContext();
         offerMaker = thereIsOfferMaker(productCatalog);
+        paymentGateway = thereIsPaymentGateway();
     }
 
     @Test
@@ -28,11 +29,14 @@ public class OrderingTest extends SalesTestCase {
         salesFacade.addProduct(productId2);
         Offer seenOffer = salesFacade.getCurrentOffer();
 
-//        String reservationId = salesFacade.acceptOffer(seenOffer, clientProvideHisData());
-//
-//        thereIsPendingReservationWithId(reservationId);
-    }
+        ReservationPaymentDetails paymentDetails = salesFacade.acceptOffer(seenOffer, clientProvideHisData());
 
+        thereIsPendingReservationWithId(paymentDetails.getReservationId());
+        thereIsPaymentRegisteredForReservation(paymentDetails.getReservationId());
+        assertThat(paymentDetails.getPaymentUrl()).isNotNull();
+    }
+    private void thereIsPaymentRegisteredForReservation(String reservationId) {
+    }
     private ClientData clientProvideHisData() {
         return new ClientData();
     }

@@ -1,4 +1,4 @@
-package pl.wojczu.payu;
+package pl.wojczu.payu.model;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;

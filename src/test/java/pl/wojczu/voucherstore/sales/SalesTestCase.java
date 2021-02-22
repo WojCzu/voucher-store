@@ -18,6 +18,7 @@ public class SalesTestCase {
     Inventory inventory;
     String customerId;
     OfferMaker offerMaker;
+    PaymentGateway paymentGateway;
 
     protected OfferMaker thereIsOfferMaker(ProductCatalogFacade productCatalogFacade) {
         return new OfferMaker(productId -> {
@@ -41,6 +42,8 @@ public class SalesTestCase {
         return new InMemoryBasketStorage();
     }
 
+    protected PaymentGateway thereIsPaymentGateway() { return new DummyPaymentGateway(); }
+
     protected ProductCatalogFacade thereIsProductCatalog() {
         return new ProductCatalogConfiguration().productCatalogFacade();
     }
@@ -63,7 +66,8 @@ public class SalesTestCase {
                 basketStorage,
                 currentConsumerContext,
                 inventory,
-                offerMaker
+                offerMaker,
+                paymentGateway
         );
     }
 }

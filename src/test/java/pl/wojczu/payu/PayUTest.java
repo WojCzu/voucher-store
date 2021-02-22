@@ -1,14 +1,21 @@
 package pl.wojczu.payu;
 
 import org.junit.Test;
+import pl.wojczu.payu.exceptions.PayUException;
+import pl.wojczu.payu.http.JavaHttpPayUApiClient;
+import pl.wojczu.payu.model.Buyer;
+import pl.wojczu.payu.model.CreateOrderResponse;
+import pl.wojczu.payu.model.OrderCreateRequest;
+import pl.wojczu.payu.model.Product;
+
+import static org.assertj.core.api.Assertions.*;
 
 import java.util.Arrays;
 import java.util.UUID;
-import static org.assertj.core.api.Assertions.*;
 
 public class PayUTest {
     @Test
-    public void itAllowsToRegisterOrder()  throws PayUException{
+    public void itAllowsToRegisterOrder()  throws PayUException {
         var payu = thereIsPayU();
         var mySystemOrderId = UUID.randomUUID().toString();
         var exampleOrderCreateRequest = thereIsExampleOrderCreate(mySystemOrderId);

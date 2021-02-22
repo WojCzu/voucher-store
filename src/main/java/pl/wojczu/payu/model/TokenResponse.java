@@ -1,4 +1,4 @@
-package pl.wojczu.payu;
+package pl.wojczu.payu.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
