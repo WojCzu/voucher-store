@@ -5,6 +5,10 @@ import pl.wojczu.voucherstore.productcatalog.ProductCatalogConfiguration;
 import pl.wojczu.voucherstore.productcatalog.ProductCatalogFacade;
 import pl.wojczu.voucherstore.sales.basket.InMemoryBasketStorage;
 import pl.wojczu.voucherstore.sales.offer.OfferMaker;
+import pl.wojczu.voucherstore.sales.ordering.InMemoryReservationRepository;
+import pl.wojczu.voucherstore.sales.ordering.ReservationRepository;
+import pl.wojczu.voucherstore.sales.payment.DummyPaymentGateway;
+import pl.wojczu.voucherstore.sales.payment.PaymentGateway;
 import pl.wojczu.voucherstore.sales.product.ProductDetails;
 
 import java.math.BigDecimal;
@@ -18,6 +22,9 @@ public class SalesTestCase {
     Inventory inventory;
     String customerId;
     OfferMaker offerMaker;
+    PaymentGateway paymentGateway;
+    ReservationRepository reservationRepository;
+
 
     protected OfferMaker thereIsOfferMaker(ProductCatalogFacade productCatalogFacade) {
         return new OfferMaker(productId -> {
@@ -41,6 +48,8 @@ public class SalesTestCase {
         return new InMemoryBasketStorage();
     }
 
+    protected PaymentGateway thereIsPaymentGateway() { return new DummyPaymentGateway(); }
+
     protected ProductCatalogFacade thereIsProductCatalog() {
         return new ProductCatalogConfiguration().productCatalogFacade();
     }
@@ -57,13 +66,19 @@ public class SalesTestCase {
         return id;
     }
 
+    protected ReservationRepository thereIsInMemoryReservationsRepository() {
+        return new InMemoryReservationRepository();
+    }
+
     protected SalesFacade thereIsSalesModule() {
         return new SalesFacade(
                 productCatalog,
                 basketStorage,
                 currentConsumerContext,
                 inventory,
-                offerMaker
+                offerMaker,
+                paymentGateway,
+                reservationRepository
         );
     }
 }

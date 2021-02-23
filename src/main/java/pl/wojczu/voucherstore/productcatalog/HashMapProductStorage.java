@@ -32,4 +32,8 @@ public class HashMapProductStorage implements ProductStorage {
                 .filter(p -> p.getPrice() != null)
                 .collect(Collectors.toList());
     }
+    @Override
+    public void clear() {
+        products.clear();
+    }
 }

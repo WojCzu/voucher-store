@@ -44,6 +44,7 @@ const refreshCurrentOfer = async () => {
 		return alert(e);
 	}
 };
+
 (() => {
 	const productsList = document.querySelector('.products');
 	getProducts().then((products) =>
