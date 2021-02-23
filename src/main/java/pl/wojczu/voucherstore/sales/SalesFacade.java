@@ -6,6 +6,13 @@ import pl.wojczu.voucherstore.sales.basket.Basket;
 import pl.wojczu.voucherstore.sales.basket.InMemoryBasketStorage;
 import pl.wojczu.voucherstore.sales.offer.Offer;
 import pl.wojczu.voucherstore.sales.offer.OfferMaker;
+import pl.wojczu.voucherstore.sales.ordering.ClientData;
+import pl.wojczu.voucherstore.sales.ordering.OfferChangedException;
+import pl.wojczu.voucherstore.sales.ordering.Reservation;
+import pl.wojczu.voucherstore.sales.payment.PaymentDetails;
+import pl.wojczu.voucherstore.sales.payment.PaymentGateway;
+import pl.wojczu.voucherstore.sales.payment.PaymentUpdateStatusRequest;
+import pl.wojczu.voucherstore.sales.payment.PaymentVerificationException;
 
 public class SalesFacade {
     ProductCatalogFacade productCatalogFacade;
@@ -43,7 +50,7 @@ public class SalesFacade {
         return offerMaker.calculateOffer(basket.getBasketItems());
     }
 
-    public ReservationPaymentDetails acceptOffer(Offer seenOffer, ClientData clientData) {
+    public PaymentDetails acceptOffer(Offer seenOffer, ClientData clientData) {
         Basket basket = basketStorage.loadForCustomer(getCurrentCustomerId())
                 .orElse(Basket.empty());
 
@@ -54,9 +61,9 @@ public class SalesFacade {
         }
         Reservation reservation = Reservation.of(currentOffer, clientData);
 
-        ReservationPaymentDetails reservationPaymentDetails = paymentGateway.register(reservation);
+        PaymentDetails paymentDetails = paymentGateway.register(reservation);
 
-        return  reservationPaymentDetails;
+        return paymentDetails;
     }
 
     public void handlePaymentStatusChanged(PaymentUpdateStatusRequest paymentUpdateStatusRequest) {

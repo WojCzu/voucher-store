@@ -1,4 +1,4 @@
-package pl.wojczu.voucherstore.sales;
+package pl.wojczu.voucherstore.sales.payment;
 
 import lombok.Getter;
 

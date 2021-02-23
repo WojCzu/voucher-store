@@ -1,11 +1,11 @@
-package pl.wojczu.voucherstore.sales;
+package pl.wojczu.voucherstore.sales.payment;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
 @Getter
 @AllArgsConstructor
-public class ReservationPaymentDetails {
+public class PaymentDetails {
     String reservationId;
     String paymentUrl;
 }

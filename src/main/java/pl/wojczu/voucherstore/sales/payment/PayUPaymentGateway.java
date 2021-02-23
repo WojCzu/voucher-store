@@ -1,6 +1,7 @@
-package pl.wojczu.voucherstore.sales;
+package pl.wojczu.voucherstore.sales.payment;
 
 import pl.wojczu.payu.PayU;
+import pl.wojczu.voucherstore.sales.ordering.Reservation;
 
 public class PayUPaymentGateway implements PaymentGateway {
     private final PayU payU;
@@ -10,7 +11,7 @@ public class PayUPaymentGateway implements PaymentGateway {
     }
 
     @Override
-    public ReservationPaymentDetails register(Reservation reservation) {
+    public PaymentDetails register(Reservation reservation) {
         return null;
     }
 

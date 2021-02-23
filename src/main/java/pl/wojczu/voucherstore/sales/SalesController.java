@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.*;
 import pl.wojczu.voucherstore.sales.offer.Offer;
+import pl.wojczu.voucherstore.sales.payment.PaymentUpdateStatusRequest;
 
 @RestController
 public class SalesController {

@@ -8,6 +8,8 @@ import pl.wojczu.payu.PayUCredentials;
 import pl.wojczu.voucherstore.productcatalog.ProductCatalogFacade;
 import pl.wojczu.voucherstore.sales.basket.InMemoryBasketStorage;
 import pl.wojczu.voucherstore.sales.offer.OfferMaker;
+import pl.wojczu.voucherstore.sales.payment.PayUPaymentGateway;
+import pl.wojczu.voucherstore.sales.payment.PaymentGateway;
 import pl.wojczu.voucherstore.sales.product.ProductCatalogProductDetailsProvider;
 import pl.wojczu.voucherstore.sales.product.ProductDetailsProvider;
 

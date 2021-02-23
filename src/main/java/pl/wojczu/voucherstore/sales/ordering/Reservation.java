@@ -1,4 +1,4 @@
-package pl.wojczu.voucherstore.sales;
+package pl.wojczu.voucherstore.sales.ordering;
 
 import pl.wojczu.voucherstore.sales.offer.Offer;
 

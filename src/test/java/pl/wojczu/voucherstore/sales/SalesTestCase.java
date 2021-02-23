@@ -5,6 +5,8 @@ import pl.wojczu.voucherstore.productcatalog.ProductCatalogConfiguration;
 import pl.wojczu.voucherstore.productcatalog.ProductCatalogFacade;
 import pl.wojczu.voucherstore.sales.basket.InMemoryBasketStorage;
 import pl.wojczu.voucherstore.sales.offer.OfferMaker;
+import pl.wojczu.voucherstore.sales.payment.DummyPaymentGateway;
+import pl.wojczu.voucherstore.sales.payment.PaymentGateway;
 import pl.wojczu.voucherstore.sales.product.ProductDetails;
 
 import java.math.BigDecimal;
