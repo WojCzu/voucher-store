@@ -8,6 +8,7 @@ import pl.wojczu.payu.PayUCredentials;
 import pl.wojczu.voucherstore.productcatalog.ProductCatalogFacade;
 import pl.wojczu.voucherstore.sales.basket.InMemoryBasketStorage;
 import pl.wojczu.voucherstore.sales.offer.OfferMaker;
+import pl.wojczu.voucherstore.sales.ordering.ReservationRepository;
 import pl.wojczu.voucherstore.sales.payment.PayUPaymentGateway;
 import pl.wojczu.voucherstore.sales.payment.PaymentGateway;
 import pl.wojczu.voucherstore.sales.product.ProductCatalogProductDetailsProvider;
@@ -19,7 +20,7 @@ import java.util.UUID;
 public class SalesConfiguration {
 
     @Bean
-    SalesFacade salesFacade(ProductCatalogFacade productCatalogFacade, OfferMaker offerMaker, Inventory inventory, PaymentGateway paymentGateway){
+    SalesFacade salesFacade(ProductCatalogFacade productCatalogFacade, OfferMaker offerMaker, Inventory inventory, PaymentGateway paymentGateway, ReservationRepository reservationRepository){
         var alwaysSameCustomer= UUID.randomUUID().toString();
 
         return new SalesFacade(
@@ -28,7 +29,8 @@ public class SalesConfiguration {
                 () -> alwaysSameCustomer,
                 inventory,
                 offerMaker,
-                paymentGateway
+                paymentGateway,
+                reservationRepository
         );
     }
     @Bean
