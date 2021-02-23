@@ -58,4 +58,10 @@ public class SalesFacade {
 
         return  reservationPaymentDetails;
     }
+
+    public void handlePaymentStatusChanged(PaymentUpdateStatusRequest paymentUpdateStatusRequest) {
+        if (!paymentGateway.isTrusted(paymentUpdateStatusRequest)) {
+            throw new PaymentVerificationException();
+        }
+    }
 }
