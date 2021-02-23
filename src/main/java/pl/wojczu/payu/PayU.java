@@ -5,7 +5,7 @@ import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.apache.commons.codec.digest.DigestUtils;
 import pl.wojczu.payu.exceptions.PayUException;
-import pl.wojczu.payu.http.JavaHttpPayUApiClient;
+import pl.wojczu.payu.http.PayUApiClient;
 import pl.wojczu.payu.model.CreateOrderResponse;
 import pl.wojczu.payu.model.OrderCreateRequest;
 import pl.wojczu.payu.model.TokenResponse;
@@ -17,11 +17,11 @@ public class PayU {
 
     public static final int HTTP_FORBIDDEN = 401;
     private final PayUCredentials credentials;
-    private final JavaHttpPayUApiClient http;
+    private final PayUApiClient http;
     private final ObjectMapper om;
     private TokenResponse token;
 
-    public PayU(PayUCredentials credentials, JavaHttpPayUApiClient http) {
+    public PayU(PayUCredentials credentials, PayUApiClient http) {
         this.credentials = credentials;
         this.http = http;
         this.om = new ObjectMapper();
@@ -30,7 +30,9 @@ public class PayU {
     }
 
     public CreateOrderResponse handle(OrderCreateRequest orderCreateRequest) throws PayUException {
-        orderCreateRequest.setMerchantPosId(credentials.getNotifyUrl());
+        orderCreateRequest.setMerchantPosId(credentials.getPosId());
+        orderCreateRequest.setNotifyUrl(credentials.getNotifyUrl());
+        
         HttpResponse<String> response = handleOrderCreation(orderCreateRequest);
 
         if (response.statusCode() == HTTP_FORBIDDEN) {
